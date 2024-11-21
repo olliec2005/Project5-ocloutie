@@ -56,9 +56,9 @@ public:
     }
 
     // Insert
-    bool insert(string key, Keyable item) {
+    bool insert(string key, Keyable item, int &col_count) {
         // If the item is already in the table, do not insert it
-        if (!find(key)) {
+        if (!find(key, col_count)) {
             // Hash the key to get an index
             unsigned long index = hornerHash(key);
             // Put the item at that index in the table
@@ -69,7 +69,7 @@ public:
     }
 
     // Find
-    optional<Keyable> find(string key) const {
+    optional<Keyable> find(string key, int &col_count) const {
         // Hash the key to get an index
         unsigned long index = hornerHash(key);
         // Check each item in the list at the index to see if the key matches
@@ -77,6 +77,7 @@ public:
             if (p.key == key) {
                 // We found the item
                 return p.value;
+                col_count++;
             }
         }
         // We didn't find the item

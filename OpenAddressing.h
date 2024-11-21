@@ -8,7 +8,7 @@
 using std::cout, std::endl, std::nullopt, std::optional, std::string, std::vector;
 
 template<typename Keyable>
-class LinearProbing {
+class DoubleHash {
 private:
     enum state {EMPTY, FILLED, REMOVED};
     struct hashable {
@@ -24,6 +24,15 @@ private:
         for (char letter : key) {
             hashVal = hashVal * 37 + letter;
         }
+        return hashVal % table.size();
+    }
+
+    unsigned long secondHash(string key) const {
+        unsigned long hashVal = 0;
+        for (char letter : key) {
+            hashVal = hashVal * 71 + letter;
+        }
+
         return hashVal % table.size();
     }
 
@@ -48,10 +57,11 @@ private:
     void rehash() {
         // Store a copy of the hash table
         vector<hashable> oldTable = table;
-
         // Empty the table
         table.clear();
         numItems = 0;
+
+        int temp = 0;
 
         // Resize the table to new size
         table.resize(nextPrime(oldTable.size() * 2));
@@ -59,7 +69,8 @@ private:
         // Reinsert all FILLED items
         for (int i = 0; i < oldTable.size(); ++i) {
             if (oldTable[i].status == FILLED) {
-                insert(oldTable[i].key, oldTable[i].value);
+                insert(oldTable[i].key, oldTable[i].value, temp);
+                //cout<<i<<endl;
             }
         }
 
@@ -67,22 +78,24 @@ private:
 
 public:
     // Constructor
-    LinearProbing(unsigned long tableSize) {
+    DoubleHash(unsigned long tableSize) {
         // This will fill the table with default Keyables and EMPTY statuses
         table.resize(nextPrime(tableSize));
         numItems = 0;
     }
 
     // Insert
-    void insert(string key, Keyable value) {
-        if (!find(key)) {
+    void insert(string key, Keyable value, int &col_count) {
+        if (!find(key, col_count)) {
             // Hash the key to get an index
             unsigned long index = hornerHash(key);
+            int i = 0;
             // Probe until we find a non-filled index
             while (table[index].status == FILLED) {
-                // Add one to the index for linear probing
-                index += 1;
+                // Double hash to get new index
+                index = (hornerHash(key) + i * secondHash(key));
                 index %= table.size();
+                i++;
             }
             table[index].key = key;
             table[index].value = value;
@@ -100,9 +113,10 @@ public:
     }
 
     // Find
-    optional<Keyable> find(string key) const {
+    optional<Keyable> find(string key, int &col_count) const {
         // Hash the key to get an index
         unsigned long index = hornerHash(key);
+        int i = 0;
         while (table[index].status != EMPTY) {
             // Check the index to see if the key matches
             if (table[index].status == FILLED && table[index].key == key) {
@@ -110,8 +124,11 @@ public:
                 return table[index].value;
             }
             // Add one to the index for linear probing
-            index += 1;
+            index = (hornerHash(key) + i * secondHash(key));
             index %= table.size();
+            i++;
+
+            col_count++;
         }
         // We didn't find the item
         return nullopt;
@@ -121,6 +138,7 @@ public:
     bool remove(string key) {
         // Hash the key to get an index
         unsigned long index = hornerHash(key);
+        int i = 0;
         while (table[index].status != EMPTY) {
             // Check the index to see if the key matches
             if (table[index].status == FILLED && table[index].key == key) {
@@ -132,8 +150,9 @@ public:
                 return true;
             }
             // Add one to the index for linear probing
-            index += 1;
+            index = (hornerHash(key) + i * secondHash(key));
             index %= table.size();
+            i++;
         }
         // We didn't find the item
         return false;
