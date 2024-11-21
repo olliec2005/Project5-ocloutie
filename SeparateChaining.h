@@ -77,8 +77,9 @@ public:
             if (p.key == key) {
                 // We found the item
                 return p.value;
-                col_count++;
             }
+
+            col_count++;
         }
         // We didn't find the item
         return nullopt;

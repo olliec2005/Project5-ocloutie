@@ -22,26 +22,26 @@ int main() {
     DoubleHash<int> hash_table(1200);
     DoubleHash<int> hash_table_2(1500);
     DoubleHash<int> hash_table_3(1750);
-    DoubleHash<int> hash_table_4(2000);
-    DoubleHash<int> hash_table_5(2500);
+    DoubleHash<int> hash_table_4(1900);
+    DoubleHash<int> hash_table_5(2200);
 
     DoubleHash<int> hash_table_6(1200);
     DoubleHash<int> hash_table_7(1500);
     DoubleHash<int> hash_table_8(1750);
-    DoubleHash<int> hash_table_9(2000);
-    DoubleHash<int> hash_table_10(2500);
+    DoubleHash<int> hash_table_9(1900);
+    DoubleHash<int> hash_table_10(2200);
 
     SeparateChaining<int> separate_chaining(1200);
     SeparateChaining<int> separate_chaining_2(1500);
     SeparateChaining<int> separate_chaining_3(1750);
-    SeparateChaining<int> separate_chaining_4(2000);
-    SeparateChaining<int> separate_chaining_5(2500);
+    SeparateChaining<int> separate_chaining_4(1900);
+    SeparateChaining<int> separate_chaining_5(2200);
 
     SeparateChaining<int> separate_chaining_6(1200);
     SeparateChaining<int> separate_chaining_7(1500);
     SeparateChaining<int> separate_chaining_8(1750);
-    SeparateChaining<int> separate_chaining_9(2000);
-    SeparateChaining<int> separate_chaining_10(2500);
+    SeparateChaining<int> separate_chaining_9(1900);
+    SeparateChaining<int> separate_chaining_10(2200);
 
     int col_count = 0;
 
@@ -61,84 +61,83 @@ int main() {
     key2_seperate << "f1, f2, f3, f4, f5" << endl;
 
     for (int i = 0; i < 1000; i++) {
-        cout << i << endl;
-        hash_table.insert(get_key(pizzas[i]), i, col_count);
+        hash_table.insert(get_key(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key1_double << col_count << ", ";
         col_count = 0;
 
-        hash_table_2.insert(get_key(pizzas[i]), i, col_count);
+        hash_table_2.insert(get_key(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key1_double << col_count << ", ";
         col_count = 0;
 
-        hash_table_3.insert(get_key(pizzas[i]), i, col_count);
+        hash_table_3.insert(get_key(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key1_double << col_count << ", ";
         col_count = 0;
 
-        hash_table_4.insert(get_key(pizzas[i]), i, col_count);
+        hash_table_4.insert(get_key(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key1_double << col_count << ", ";
         col_count = 0;
 
-        hash_table_5.insert(get_key(pizzas[i]), i, col_count);
+        hash_table_5.insert(get_key(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key1_double << col_count << endl;
         col_count = 0;
 
-        hash_table_6.insert(get_key_2(pizzas[i]), i, col_count);
+        hash_table_6.insert(get_key_2(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key2_double << col_count << ", ";
         col_count = 0;
 
-        hash_table_7.insert(get_key_2(pizzas[i]), i, col_count);
+        hash_table_7.insert(get_key_2(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key2_double << col_count << ", ";
         col_count = 0;
 
-        hash_table_8.insert(get_key_2(pizzas[i]), i, col_count);
+        hash_table_8.insert(get_key_2(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key2_double << col_count << ", ";
         col_count = 0;
 
-        hash_table_9.insert(get_key_2(pizzas[i]), i, col_count);
+        hash_table_9.insert(get_key_2(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key2_double << col_count << ", ";
         col_count = 0;
 
-        hash_table_10.insert(get_key_2(pizzas[i]), i, col_count);
+        hash_table_10.insert(get_key_2(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key2_double << col_count << endl;
         col_count = 0;
 
-        separate_chaining.insert(get_key(pizzas[i]), i, col_count);
+        separate_chaining.insert(get_key(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key1_seperate << col_count << ", ";
         col_count = 0;
 
-        separate_chaining_2.insert(get_key(pizzas[i]), i, col_count);
+        separate_chaining_2.insert(get_key(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key1_seperate << col_count << ", ";
         col_count = 0;
 
-        separate_chaining_3.insert(get_key(pizzas[i]), i, col_count);
+        separate_chaining_3.insert(get_key(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key1_seperate << col_count << ", ";
         col_count = 0;
 
-        separate_chaining_4.insert(get_key(pizzas[i]), i, col_count);
+        separate_chaining_4.insert(get_key(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key1_seperate << col_count << ", ";
         col_count = 0;
 
-        separate_chaining_5.insert(get_key(pizzas[i]), i, col_count);
+        separate_chaining_5.insert(get_key(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key1_seperate << col_count << endl;
         col_count = 0;
 
-        separate_chaining_6.insert(get_key_2(pizzas[i]), i, col_count);
+        separate_chaining_6.insert(get_key_2(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key2_seperate << col_count << ", ";
         col_count = 0;
 
-        separate_chaining_7.insert(get_key_2(pizzas[i]), i, col_count);
+        separate_chaining_7.insert(get_key_2(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key2_seperate << col_count << ", ";
         col_count = 0;
 
-        separate_chaining_8.insert(get_key_2(pizzas[i]), i, col_count);
+        separate_chaining_8.insert(get_key_2(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key2_seperate << col_count << ", ";
         col_count = 0;
 
-        separate_chaining_9.insert(get_key_2(pizzas[i]), i, col_count);
+        separate_chaining_9.insert(get_key_2(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key2_seperate << col_count << ", ";
         col_count = 0;
 
-        separate_chaining_10.insert(get_key_2(pizzas[i]), i, col_count);
+        separate_chaining_10.insert(get_key_2(pizzas[i]), pizzas[i].get_pizza_id(), col_count);
         key2_seperate << col_count << endl;
         col_count = 0;
     }
@@ -154,7 +153,6 @@ int main() {
     cout << "Key 2 table 3 length: " << hash_table_8.getTableSize() << endl;
     cout << "Key 2 table 4 length: " << hash_table_9.getTableSize() << endl;
     cout << "Key 2 table 5 length: " << hash_table_10.getTableSize() << endl;
-
 
     return 0;
 }
